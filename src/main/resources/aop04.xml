@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+	<bean id="student" class="com.spring.aop04.Student">
+		<property name="name" value="홍길동"/>
+		<property name="hakbun" value="20200506"/>
+		<property name="age" value="28"/>
+		<property name="grade" value="3"/>
+	</bean>
+		<bean id="staff" class="com.spring.aop04.Staff">
+		<property name="name" value="말똥"/>
+		<property name="age" value="24"/>
+		<property name="dept" value="경영지원부"/>
+	</bean>
+	
+	<bean id="adviceLog" class="com.spring.aop04.AdviceLog"/>
+		<aop:config>
+			<aop:aspect id="prof" ref="adviceLog"> 
+				<aop:pointcut expression="within(com.spring.aop04.*)" id="pcMethod"/>
+				<aop:around method="profile" pointcut-ref="pcMethod"/>
+			</aop:aspect>
+		</aop:config>
+</beans>

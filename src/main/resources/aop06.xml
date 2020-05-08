@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<!-- 핵심기능 클래스 빈 등록 -->
+	<bean id="target" class="com.spring.aop06.MessageImpl">
+		<property name="name" value="홍종현"/>
+	</bean>
+	
+	
+	
+	<!-- 공통관심사항 클래스 빈 등록 -->
+	<bean id="aspectLog" class="com.spring.aop06.LogginAspect"/>
+	
+	<aop:config>
+		<aop:aspect id="test" ref="aspectLog">
+			<aop:pointcut expression="execution(* helloAop())" id="point"/>
+			<aop:around method="logAround" pointcut-ref="point"/>
+		</aop:aspect>
+	</aop:config>
+</beans>

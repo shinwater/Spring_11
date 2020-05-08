@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	
+	<!-- 어노테이션 방식으로 AOP를 구현할 때 반드시 명시 태그 -->
+	<aop:aspectj-autoproxy/>
+	
+	<!-- target(핵심 기능) 클래스 빈 등록 -->
+	<bean id="perform" class="com.spring.aop05.Performer"/>
+	
+	<!-- advice(공통관심사항) 클래스 빈 등록 -->
+	<bean id="aspectapp" class="com.spring.aop05.AudienceAOP"/>
+</beans>

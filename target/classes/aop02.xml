@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<bean id="boy" class="com.spring.aop02.Boy"></bean>
+	<bean id="girl" class="com.spring.aop02.Girl"></bean>
+	<bean id="myaspect" class="com.spring.aop02.MyAspect"></bean>
+
+	<aop:config>
+		<!-- 공통 관심 사항이 있는 킁애스 -->
+		<aop:aspect ref="myaspect">
+			<!-- 클래스이름과 상관없이 doSomething() 메서드가 pointCut이 된다 -->
+			<aop:pointcut expression="execution(* doSomething())" id="mypointcut"/><!--모든클래스안의 do썸띵 메서드를 포인트컷으로 삼겠다 -->
+			<aop:before method="before" pointcut-ref="mypointcut"/><!-- 괄호 열고닫고는 빼고 메서드이름만 ㅆㅡ면됨 -->
+			<aop:after method="after" pointcut-ref="mypointcut"/>
+			<aop:after-returning method="after_returning" pointcut-ref="mypointcut"/>
+			<aop:after-throwing method="after_throwing" pointcut-ref="mypointcut"/>
+		</aop:aspect>
+	</aop:config>
+</beans>
